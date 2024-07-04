@@ -1,13 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/*import logo from './logo.svg';*/
+/*import './App.css';*/
 import Labs from "./Labs";
 
 function App() {
   return (
     <div className="App">
       <h1>Welcome to Web Dev</h1>
-      <h2>Nile Naim</h2>
+      <h2>Nile Naim2</h2>
       <Labs/>
     </div>
   );
