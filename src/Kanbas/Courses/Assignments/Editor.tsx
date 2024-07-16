@@ -1,126 +1,144 @@
 export default function AssignmentEditor() {
     return (
       <div id="wd-assignments-editor">
-        <label htmlFor="wd-name">Assignment Name</label>
+        <label htmlFor="wd-name" className="form-label">Assignment Name</label>
         <br />
-        <input id="wd-name" value="A1 - ENV + HTML" /><br /><br />
-        <textarea id="wd-description" cols={50} rows={10}>
+        <input id="wd-name" className="form-control" value="A1" /><br /><br />
+        <textarea id="wd-description" className="form-control" rows={10} >
           The assignment is available online Submit a link to the landing page of
         </textarea>
         <br />
-        <table>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-points">Points</label>
-            </td>
-            <td>
-              <input id="wd-points" value={100} />
-            </td>
-          </tr>
+            <div>
 
-          <tr>
-            <td align="right" valign="top">
-                <label htmlFor="wd-group">Assignment Group</label>
-            </td>
-            <td align="left" valign="top">
-                <select id="wd-group">
+              <div className="d-flex justify-content-end align-items-center mt-4">
+                <div className="d-flex col-11" >
+                  <div className="col-2">
+                  <label htmlFor="wd-points" className="form-label text-right m-2 me-3">Points</label>
+                  </div>
+                  <div className="col-10">
+                  <input id="wd-points" className="form-control" value={100} />
+                  </div>
+                </div>
+              </div>
+
+              <div className="d-flex justify-content-end align-items-center mt-4">
+              <div className="d-flex col-11" >
+                <div className="col-2">
+                <label htmlFor="wd-group" className="form-label text-right m-2 me-3">Assignment Group</label>
+                </div>
+
+                <div className="col-10">
+                <select id="wd-group" className="form-select">
                     <option value="ASSIGNMENTS">ASSIGNMENTS</option>
                 </select>
-            </td>
-          </tr>
+                </div>
+                </div>
+              </div>
 
-          <tr>
-            <td align="right" valign="top">
-                <label htmlFor="wd-display-grade-as">Display Grade as</label>
-            </td>
-            <td>
-                <select id="wd-display-grade-as">
+              <div className="d-flex justify-content-end align-items-center mt-4">
+              <div className="d-flex col-11" >
+                <div className="col-2">
+                <label htmlFor="wd-display-grade-as" className="form-label text-right m-2 me-3">Display Grade as</label>
+                </div>
+
+                <div className="col-10">
+                <select id="wd-display-grade-as" className="form-select">
                     <option value="PERCENTAGE">Percentage</option>
                     <option value="LETTER">Letter</option>
                 </select>
-            </td>
-          </tr>
+                </div>
+                </div>
+              </div>
 
-          <tr>
-            <td align="right" valign="top">
-                <label htmlFor="wd-submission-type">Submission Type</label>
-            </td>
-            <td>
-                <select id="wd-submission-type">
+
+              <div className="d-flex justify-content-end align-items-center mt-4">
+              <div className="d-flex col-11" >
+                <div className="col-2">
+                  <label htmlFor="wd-submission-type" className="form-label text-right m-2 me-3">Submission Type</label>
+                </div>
+
+                <div className="col-10 border border-dark ps-3 pt-2">
+                <select id="wd-submission-type" className="form-select me-3">
                     <option value="ONLINE">Online</option>
                 </select>
-            </td>
-          </tr>
-          <tr>
-            <td align ="left">
-                <label htmlFor="wd-online-entry-options">Online Entry Options</label>
+                <label htmlFor="wd-online-entry-options" className="fs-5 form-label mt-3">Online Entry Options</label>
                 <br />
-                <input type="checkbox" name="check-text" id="wd-text-entry" />
-                <label htmlFor="wd-text-entry">Text Entry</label>
+                <input type="checkbox" name="check-text" id="wd-text-entry" className="form-check-input"/>
+                <label htmlFor="wd-text-entry" className="form-label">Text Entry</label>
                 <br />
-                <input type="checkbox" name="check-website" id="wd-website-url" />
-                <label htmlFor="wd-website-url">Website URL</label>
+                <input type="checkbox" name="check-website" id="wd-website-url" className="form-check-input"/>
+                <label htmlFor="wd-website-url" className="form-label">Website URL</label>
                 <br />
-                <input type="checkbox" name="check-media" id="wd-media-recordings" />
-                <label htmlFor="wd-media-recordings">Media Recordings</label>
+                <input type="checkbox" name="check-media" id="wd-media-recordings" className="form-check-input"/>
+                <label htmlFor="wd-media-recordings" className="form-label">Media Recordings</label>
                 <br />
-                <input type="checkbox" name="check-annotation" id="wd-student-annotation" />
-                <label htmlFor="wd-student-annotation">Student Annotation</label>
+                <input type="checkbox" name="check-annotation" id="wd-student-annotation" className="form-check-input"/>
+                <label htmlFor="wd-student-annotation" className="form-label">Student Annotation</label>
                 <br />
-                <input type="checkbox" name="check-file" id="wd-file-upload" />
-                <label htmlFor="wd-file-upload">File Uploads</label>
-                <br />
-            </td>
-          </tr>
-        <tr>
-            <td align="left" valign="top">
-              <label htmlFor="wd-assign">Assign</label>
-              <label htmlFor="wd-assign-to"> Assign to</label>
-              <br />
-              <input type="text" id="wd-assign-to" placeholder="Everyone"/>
-            </td>
-        </tr>
+                <input type="checkbox" name="check-file" id="wd-file-upload" className="form-check-input"/>
+                <label htmlFor="wd-file-upload" className="form-label">File Uploads</label>
+              </div>
+              </div>
+              </div>
 
-        <tr>
-            <td align="left" valign="top">
-                <label htmlFor="wd-due-date">Due</label>
+
+              <div className="d-flex justify-content-end align-items-center mt-4">
+              <div className="d-flex col-11" >
+              <div className="col-2">
+                <label htmlFor="wd-assign" className="form-label text-right m-2 me-3">Assign</label>
+              </div>
+
+              <div className="col-10 border border-dark ps-3 pt-2">
+              <label htmlFor="wd-assign-to" className="form-label fs-5"> Assign to</label>
+              <br />
+              <input type="text" id="wd-assign-to" placeholder="Everyone" className="form-control"/>
+
+                <label htmlFor="wd-due-date" className="form-label fs-5 mt-3">Due</label>
                 <br />
                 <input type="date"
                     id="wd-due-date"
-                    value="2000-01-21"/>
+                    value="2000-01-21"
+                    className="form-control"/>
                     <br />
                     <br/>
-            </td>
-        </tr>
 
-        <tr>
-            <td align="left" valign="top">
-                <label htmlFor="wd-available-from">Available from</label>
+                <div className="d-flex">
+                <div className="col-6">
+                <label htmlFor="wd-available-from" className="form-label fs-5">Available from</label>
                 <br />
                 <input type="date"
                     id="wd-available-from"
-                    value="2000-01-21"/>
+                    value="2000-01-21"
+                    className="form-control"/>
                     <br />
                     <br/>
-            </td>
-            <td align="left" valign="top">
-                <label htmlFor="wd-available-until">Until</label>
+                </div>
+
+                <div className="col-6">
+                <label htmlFor="wd-available-until" className="form-label fs-5">Until</label>
                 <br />
                 <input type="date"
                     id="wd-available-until"
-                    value="2000-01-21"/>
+                    value="2000-01-21"
+                    className="form-control"/>
                     <br />
                     <br/>
-            </td>
-        </tr>
-        <tr>
-            <td align="right" valign="top">
+                </div>
+                </div>
+
+                </div>
+                </div>
+                </div>
+
                 <hr />
-                <button>Cancel</button>
-                <button>Save</button>
-            </td>
-        </tr>
-        </table>
+                <button className="btn border-dark me-2">
+                  Cancel
+                </button>
+                <button className="btn border-dark me-2">
+                  Save
+                </button>
+
+                </div>
       </div>
   );}
   
