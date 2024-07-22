@@ -9,7 +9,6 @@ import { assignments,grades,enrollments,users } from "../../Database";
 export default function Grades() {
   const test = useParams();
   const results1 = {student_id:null,student_name:null}; 
-  //let pure_assignments=[];
   const cid = test.id;
   const assignment_list = assignments.filter((assignment) => assignment.course ===cid);
   const user_list = grades.filter((grade)=>(grade.assignment === assignment_list[0]._id))
@@ -19,10 +18,7 @@ export default function Grades() {
   console.log(user_list);
   
   const userInCourse = enrollments.filter((enrollment) =>enrollment.course ===cid);
-  {/*for(let i =0; i < assignment_list.length; i++){
-    
-    pure_assignments.push(assignment_list[i]._id);
-  }*/}
+
   const pure_assignments = assignment_list.filter((assignment) => (assignment._id) )
   let fResults = [];
 
@@ -99,35 +95,11 @@ for (let k = 0; k < user_list.length; k++) {
                   <label>out of 100</label>
                 </th>
               ))}
-              {/*
-              
-            <th scope="col" className="border border-secondary text-center">
-              <label>A1 SETUP</label>
-              <br />
-              <label htmlFor="">out of 100</label>
-            </th>
-            <th scope="col" className="border border-secondary text-center">
-              <label>A2 SETUP</label>
-              <br />
-              <label>out of 100</label>
-            </th>
-            <th scope="col" className="border border-secondary text-center">
-              <label>A3 SETUP</label>
-              <br />
-              <label>out of 100</label>
-            </th>
-            <th scope="col" className="border border-secondary text-center">
-              <label>A4 SETUP</label>
-              <br />
-              <label>out of 100</label>
-            </th>
-            */}
+
             </tr>
           </thead>
           <tbody>
           {userInCourse.map((user) => {
-            //console.log("user2:",users);
-            //console.log("user:",user);
             const foundUser = users.find((user2) => user2._id === user.user);
             return (
               <tr key={user._id}>
