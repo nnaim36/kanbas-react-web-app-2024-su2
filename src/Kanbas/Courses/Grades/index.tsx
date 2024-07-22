@@ -3,14 +3,48 @@ import { FaGear } from "react-icons/fa6";
 import { CiImport } from "react-icons/ci";
 import { FaFileExport } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-import { assignments } from "../../Database";
+import { assignments,grades,enrollments,users } from "../../Database";
+
 
 export default function Grades() {
   const test = useParams();
+  const results1 = {student_id:null,student_name:null}; 
+  //let pure_assignments=[];
   const cid = test.id;
   const assignment_list = assignments.filter((assignment) => assignment.course ===cid);
+  const user_list = grades.filter((grade)=>(grade.assignment === assignment_list[0]._id))
   console.log("grades value");
-  console.log(assignment_list)
+  console.log(assignment_list);
+  console.log("user list");
+  console.log(user_list);
+  
+  const userInCourse = enrollments.filter((enrollment) =>enrollment.course ===cid);
+  {/*for(let i =0; i < assignment_list.length; i++){
+    
+    pure_assignments.push(assignment_list[i]._id);
+  }*/}
+  const pure_assignments = assignment_list.filter((assignment) => (assignment._id) )
+  let fResults = [];
+
+for (let k = 0; k < user_list.length; k++) {
+  var temp = [];
+  var temp2 = [];
+  let username = users.find((user) => user._id === user_list[k]._id);
+  console.log("user name:",username);
+  temp.push(username);
+  temp.push(user_list[k]);
+  
+  for (let i = 0; i < pure_assignments.length; i++) {
+    var grade = grades.find((grade) => (grade.student === user_list[k]._id && grade.assignment === pure_assignments[i]._id));
+    temp2.push(grade);
+  }
+
+  fResults.push(temp);
+  fResults.push(temp2);
+  console.log("temp2 value:", temp2);
+}
+  console.log("final value");
+  console.log(fResults);
   return(
     <div>
       <div className="d-flex justify-content-end">
@@ -91,51 +125,33 @@ export default function Grades() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row" className="text-danger border border-secondary">Mark Henry</th>
-              <td className="border border-secondary">
-                <input type="number" placeholder="0"/>%
-              </td>
-              <td className="border border-secondary">
-                <input type="number" placeholder="0"/>%
-              </td>
-              <td className="border border-secondary">
-                <input type="number" placeholder="0"/>%
-                </td>
-              <td className="border border-secondary">
-                <input type="number" placeholder="0"/>%
-              </td>
-            </tr>
-            <tr>
-              <th scope="row" className="text-danger border border-secondary">Tod Guy</th>
-              <td className="border border-secondary">
-                <input type="number" placeholder="0"/>%
-              </td>
-              <td className="border border-secondary">
-                <input type="number" placeholder="0"/>%
-              </td>
-              <td className="border border-secondary">
-                <input type="number" placeholder="0"/>%
-              </td>
-              <td className="border border-secondary">
-                <input type="number" placeholder="0"/>%
-              </td>
-            </tr>
-            <tr>
-              <th scope="row" className="text-danger border border-secondary">Nile</th>
-              <td className="border border-secondary">
-                <input type="number" placeholder="0"/>%
-              </td>
-              <td className="border border-secondary">
-                <input type="number" placeholder="0"/>%
-              </td>
-              <td className="border border-secondary">
-                <input type="number" placeholder="0"/>%
-              </td>
-              <td className="border border-secondary">
-                <input type="number" placeholder="0"/>%
-              </td>
-            </tr>
+          {userInCourse.map((user) => {
+            //console.log("user2:",users);
+            //console.log("user:",user);
+            const foundUser = users.find((user2) => user2._id === user.user);
+            return (
+              <tr key={user._id}>
+                <th scope="row" className="text-danger border border-secondary">
+                  {foundUser ? foundUser.firstName+" "+foundUser.lastName : 'User not found'}
+                </th>
+                {assignment_list.map((assignment)=>{
+
+                  const studentAssignmentGrades = grades.filter((grade) => grade.assignment ===assignment._id);
+                  const assignmentGrade = studentAssignmentGrades.find((grade2)=>grade2.student===user.user);
+                  const fGrade= Number(assignmentGrade?.grade);
+                  console.log("student assign grade:",studentAssignmentGrades);
+                  console.log("user:",user);
+                  console.log("grade:",fGrade);
+                  return(
+                    <td className="border border-secondary">
+                      <input type="number" placeholder={ !isNaN(fGrade) ? `${fGrade}` : "0"}/>%
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+
           </tbody>
         </table>
             </div>
