@@ -20,7 +20,7 @@ export default function Kanbas() {
 
   export default function Kanbas() {
     return (
-      <div id="wd-kanbas">
+      <div id="wd-kanbas" className="flex d-flex">
         <KanbasNavigation />
           <div className="wd-main-content-offset p-3">
             <Routes>

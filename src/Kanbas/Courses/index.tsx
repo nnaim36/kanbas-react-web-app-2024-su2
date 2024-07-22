@@ -4,16 +4,33 @@ import Home from "./Home";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
-import { Navigate, Route, Routes} from "react-router"
+import {courses} from "../Database";
+import { Navigate, Route, Routes, useLocation,useParams} from "react-router-dom"
+
 import { FaAlignJustify } from 'react-icons/fa';
 import "../styles.css";
 
 export default function Courses() {
+    {/*const {cid}  = useParams();*/}
+    {/*const cid = "RS102";*/}
+
+    const test = useParams();
+    const cid = test.id;
+    const course = courses.find((course) => course._id === cid);
+    const { pathname } = useLocation();
+    console.log("couse vale");
+    console.log(test);
+    console.log(course);
     return (
       <div id="wd-courses">
         <h2 className="text-danger">
-        <FaAlignJustify className="me-4 fs-4 mb-1" />
-          Course 1234
+          <FaAlignJustify className="me-4 fs-4 mb-1" />
+          {/**/}
+          {course && course.name} &gt;
+           {pathname.split("/")[4]}
+          
+          {/**/}
+          {/*TEst*/}
         </h2>
         <hr />
           <div className="container">
@@ -21,10 +38,11 @@ export default function Courses() {
           <div className="col-2">
             <CoursesNavigation />
           </div>
+          
           <div className="col-10">
             <Routes>
               <Route path="/" element={<Navigate to="Home" />} />
-              <Route path="Home" element={<Home />} />
+              <Route path="Home" element={<Home a={pathname.split("/")[3]}/>} />
               <Route path="Modules" element={<Modules />} />
               <Route path="Piazza" element={<h1>Piazza</h1>} />
               <Route path="Zoom" element={<h1>Zoom</h1>} />
