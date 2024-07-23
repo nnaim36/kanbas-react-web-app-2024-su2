@@ -65,6 +65,7 @@ export default function Assignments() {
         {assignment_list.map((assignment)=>(
             <li className="wd-assignment-list-item list-group-item p-3 ps-1"> 
               <a className="wd-assignment-link" href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>
+
               <div className="d-flex align-items-center">
                 <div className="flex-fill">
                   <BsGripVertical className="me-2 fs-3 text-dark"/>
@@ -77,10 +78,10 @@ export default function Assignments() {
                   <label className="text text-dark fs-3">{assignment.title}</label>
                   <br />
                   <label className="text text-danger">Multiple Modules |</label>
-                  <label className="text text-dark"> Not available until May 6 at 12:00am |</label>
+                  <label className="text text-dark"> Not available until {assignment.avail_date} |</label>
                   <br />
-                  <label className="text text-dark">Due May 13 at 11:59pm |</label>
-                  <label className="text text-dark">100 pts</label>
+                  <label className="text text-dark">Due {assignment.due_date} |</label>
+                  <label className="text text-dark">{assignment.points} pts</label>
                 </div>
 
                 <div className="flex-fill">
