@@ -8,7 +8,7 @@ import { GoPlus } from "react-icons/go";
 import { assignments } from "../../Database";
 import { enrollments } from "../../Database";
 import { useParams } from "react-router-dom";
-
+import { Link, useLocation } from "react-router-dom";
 
 export default function Assignments() {
     const test2= "RS102";
@@ -63,7 +63,7 @@ export default function Assignments() {
           </div>
         <ul id="wd-assignment-list" className="wd-assignments list-group rounded-0">
         {assignment_list.map((assignment)=>(
-            <li className="wd-assignments list-group-item  p-0 mb-5 fs-5 border-gray"> 
+            <li className="wd-assignment-list-item list-group-item p-3 ps-1"> 
               <a className="wd-assignment-link" href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>
               <div className="d-flex align-items-center">
                 <div className="flex-fill">
@@ -95,103 +95,6 @@ export default function Assignments() {
             </li>
           )
           )}
-          <li className="wd-assignment-list-item list-group-item p-3 ps-1">
-            <a className="wd-assignment-link"
-              href="#/Kanbas/Courses/{}/Assignments/123">
-            <div className="d-flex align-items-center">
-            <div className="flex-fill">
-              <BsGripVertical className="me-2 fs-3 text-dark"/>
-            </div>
-
-            <div className="flex-fill">
-              <MdOutlineAssignment className="text text-success fs-3"/>
-            </div>
-            
-            <div className="flex-fill">
-            <label className="text text-dark fs-3">A1</label>
-            <br />
-            <label className="text text-danger">Multiple Modules |</label>
-            <label className="text text-dark"> Not available until May 6 at 12:00am |</label>
-            <br />
-            <label className="text text-dark">Due May 13 at 11:59pm |</label>
-            <label className="text text-dark">100 pts</label>
-            
-            </div>
-            <div className="flex-fill">
-              <GreenCheckmark />
-            </div>
-            <div className="flex-fill text-dark">
-              <IoEllipsisVertical/>
-            </div>
-            </div>
-            </a>
-        </li>
-        <li className="wd-assignment-list-item list-group-item p-3 ps-1">
-          <a className="wd-assignment-link"
-              href="#/Kanbas/Courses/1234/Assignments/a2">
-          <div className="d-flex align-items-center">
-          <div className="flex-fill">
-              <BsGripVertical className="me-2 fs-3 text-dark"/>
-            </div>
-
-            <div className="flex-fill">
-              <MdOutlineAssignment className="text text-success fs-3"/>
-            </div>
-
-            <div className="flex-fill">
-
-            <label className="text text-dark fs-3">A2</label>
-            <br />
-            <label className="text text-danger">Multiple Modules |</label>
-            <label className="text text-dark"> Not available until May 13 at 12:00am |</label>
-            <br />
-            <label className="text text-dark">Due May 20 at 11:59pm |</label>
-            <label className="text text-dark">100 pts</label>
-            </div>
-
-            <div className="flex-fill">
-              <GreenCheckmark />
-            </div>
-            <div className="flex-fill">
-              <IoEllipsisVertical className="text text-dark"/>
-            </div>
-            </div>
-            </a>
-          {/* Complete On Your Own */}
-        </li>
-        <li className="wd-assignment-list-item list-group-item p-3 ps-1">
-          <a className="wd-assignment-link"
-              href="#/Kanbas/Courses/1234/Assignments/a3">
-          <div className="d-flex align-items-center">
-          <div className="flex-fill text-dark">
-              <BsGripVertical className="me-2 fs-3"/>
-            </div>
-
-            <div className="flex-fill">
-              <MdOutlineAssignment className="text text-success fs-3"/>
-            </div>
-
-            <div className="flex-fill">
-
-            <label className="text text-dark fs-3">A3</label>
-            <br />
-            <label className="text text-danger">Multiple Modules |</label>
-            <label className="text text-dark"> Not available until May 20 at 12:00am |</label>
-            <br />
-            <label className="text text-dark">Due May 27 at 11:59pm |</label>
-            <label className="text text-dark">100 pts</label>
-            </div>
-
-            <div className="flex-fill">
-              <GreenCheckmark />
-            </div>
-            <div className="flex-fill text-dark">
-              <IoEllipsisVertical/>
-            </div>
-          </div>
-          </a>
-          {/* Complete On Your Own */}
-        </li>
 
       </ul>
 
