@@ -26,14 +26,20 @@ import VariablesAndConstants from "./VariablesAndConstrants";
 import VariableTypes from "./VariablesTypes";
 import Highlight from "./Highlight";
 import DestructingImports from "./DestructingImports";
+import TemplateLiterals from "./TemplateLiterals";
+import ArrayIndexAndLength from "./ArrayIndexAndLength";
+import ForLoops from "./ForLoops";
+import FindFunction from "./FindFunction";
+import FindIndex from "./FindIndex";
+import FilterFunction from "./FilterFunction";
 
 export default function Lab3() {
     return (
       <div id="wd-lab3" className="container-fluid">
-        <h2>Lab 3 :)</h2>
-        <h3>Variables and constraints</h3>
+        <h2>Lab 3</h2>
+
         <VariablesAndConstants/>
-        <h3>Variable</h3>
+
         <VariableTypes />
         <br />
         <BooleanVariables />
@@ -53,9 +59,15 @@ export default function Lab3() {
         <ArrowFunctions />
         <br />
         <ImpliedReturn />
+        <TemplateLiterals />
         <SimpleArrays />
+        <ArrayIndexAndLength />
         <AddingAndRemovingToFromArrays />
+        <ForLoops />
         <MapFunction />
+        <FindFunction />
+        <FindIndex />
+        <FilterFunction />
         <JsonStringify />
         <House />
         <TodoItem />
@@ -67,6 +79,7 @@ export default function Lab3() {
 
         <Classes/>
         <Styles />
+        <hr />
         <Add a={3} b={4} />
         <h4>Square of 4</h4>
         <Square>4</Square>
