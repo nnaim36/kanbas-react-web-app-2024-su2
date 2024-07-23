@@ -11,35 +11,26 @@ import { FaAlignJustify } from 'react-icons/fa';
 import "../styles.css";
 
 export default function Courses() {
-    {/*const {cid}  = useParams();*/}
-    {/*const cid = "RS102";*/}
-
     const test = useParams();
     const cid = test.id;
     const course = courses.find((course) => course._id === cid);
     const { pathname } = useLocation();
-    console.log("couse vale");
-    console.log(test);
-    console.log(course);
+
     return (
       <div id="wd-courses">
         <h2 className="text-danger">
           <FaAlignJustify className="me-4 fs-4 mb-1" />
-          {/**/}
           {course && course.name} &gt;
            {pathname.split("/")[4]}
-          
-          {/**/}
-          {/*TEst*/}
         </h2>
         <hr />
           <div className="container">
           <div className="row">
-          <div className="col-2">
+          <div className="col-3">
             <CoursesNavigation />
           </div>
           
-          <div className="col-10">
+          <div className="col-9">
             <Routes>
               <Route path="/" element={<Navigate to="Home" />} />
               <Route path="Home" element={<Home a={pathname.split("/")[3]}/>} />

@@ -8,7 +8,7 @@ export default function AssignmentEditor() {
   const cid = test.id;
   const assignment = assignments.find((assignment) => assignment._id ===cid);
     return (
-      <div id="wd-assignments-editor">
+      <div id="wd-assignments-editor" className="d-flex flex-column">
         <label htmlFor="wd-name" className="form-label">Assignment Name</label>
         <br />
         <input id="wd-name" className="form-control" value={`${assignment?.title}`} /><br /><br />
@@ -20,10 +20,10 @@ export default function AssignmentEditor() {
 
         <div className="d-flex justify-content-end align-items-center mt-4">
           <div className="d-flex col-11" >
-            <div className="col-2">
+            <div className="col-3">
             <label htmlFor="wd-points" className="form-label text-right m-2 me-3">Points</label>
             </div>
-            <div className="col-10">
+            <div className="col-9">
             <input id="wd-points" className="form-control" value={`${assignment?.points}`} />
             </div>
           </div>
@@ -31,10 +31,10 @@ export default function AssignmentEditor() {
 
         <div className="d-flex justify-content-end align-items-center mt-4">
           <div className="d-flex col-11" >
-            <div className="col-2">
+            <div className="col-3">
               <label htmlFor="wd-group" className="form-label text-right m-2 me-3">Assignment Group</label>
             </div>
-            <div className="col-10">
+            <div className="col-9">
               <select id="wd-group" className="form-select">
                 <option value="ASSIGNMENTS">ASSIGNMENTS</option>
               </select>
@@ -44,10 +44,10 @@ export default function AssignmentEditor() {
 
         <div className="d-flex justify-content-end align-items-center mt-4">
           <div className="d-flex col-11" >
-            <div className="col-2">
+            <div className="col-3">
               <label htmlFor="wd-display-grade-as" className="form-label text-right m-2 me-3">Display Grade as</label>
             </div>
-            <div className="col-10">
+            <div className="col-9">
               <select id="wd-display-grade-as" className="form-select">
                 <option value="PERCENTAGE">Percentage</option>
                 <option value="LETTER">Letter</option>
@@ -58,10 +58,10 @@ export default function AssignmentEditor() {
 
         <div className="d-flex justify-content-end align-items-center mt-4">
           <div className="d-flex col-11" >
-            <div className="col-2">
+            <div className="col-3">
               <label htmlFor="wd-submission-type" className="form-label text-right m-2 me-3">Submission Type</label>
             </div>
-            <div className="col-10 border border-dark ps-3 pt-2">
+            <div className="col-9 border border-dark ps-3 pt-2">
               <select id="wd-submission-type" className="form-select me-3">
                 <option value="ONLINE">Online</option>
               </select>
@@ -88,10 +88,10 @@ export default function AssignmentEditor() {
 
         <div className="d-flex justify-content-end align-items-center mt-4">
           <div className="d-flex col-11" >
-            <div className="col-2">
+            <div className="col-3">
               <label htmlFor="wd-assign" className="form-label text-right m-2 me-3">Assign</label>
             </div>
-            <div className="col-10 border border-dark ps-3 pt-2">
+            <div className="col-9 border border-dark ps-3 pt-2">
               <label htmlFor="wd-assign-to" className="form-label fs-5"> Assign to</label>
               <br />
               <input type="text" id="wd-assign-to" placeholder="Everyone" className="form-control"/>
