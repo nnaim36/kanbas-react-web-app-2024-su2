@@ -4,18 +4,20 @@ import Home from "./Home";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
-import {courses} from "../Database";
+
 import { Navigate, Route, Routes, useLocation,useParams} from "react-router-dom"
 
 import { FaAlignJustify } from 'react-icons/fa';
 import "../styles.css";
 
-export default function Courses() {
+export default function Courses({ courses }: { courses: any[]; }) {
     const test = useParams();
     const cid = test.id;
     const course = courses.find((course) => course._id === cid);
     const { pathname } = useLocation();
-
+    console.log("courses:",course);
+    console.log("cid:",cid);
+    console.log("test:",cid);
     return (
       <div id="wd-courses">
         <h2 className="text-danger">
