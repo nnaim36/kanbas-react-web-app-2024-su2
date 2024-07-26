@@ -37,7 +37,8 @@ export default function Dashboard(
   };*/
 
 
-
+  console.log("dashboard courses:",courses);
+  console.log("dashboard courses val1", typeof courses[0]._id);
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />

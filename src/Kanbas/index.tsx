@@ -42,7 +42,8 @@ export default function Kanbas() {
       })
     );
   };
-
+    console.log("kanbus course:",course);
+    console.log("kanbus courses:",courses);
     return (
       <div id="wd-kanbas" className="flex d-flex">
         <KanbasNavigation />

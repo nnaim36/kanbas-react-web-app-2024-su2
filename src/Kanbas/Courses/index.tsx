@@ -12,12 +12,13 @@ import "../styles.css";
 
 export default function Courses({ courses }: { courses: any[]; }) {
     const test = useParams();
-    const cid = test.id;
+    const cid = test.cid;
     const course = courses.find((course) => course._id === cid);
     const { pathname } = useLocation();
-    console.log("courses:",course);
-    console.log("cid:",cid);
-    console.log("test:",cid);
+    console.log("courses courses:",courses);
+    console.log("courses course:",course);
+    console.log("courses cid:",cid);
+    console.log("courses test:",test);
     return (
       <div id="wd-courses">
         <h2 className="text-danger">
