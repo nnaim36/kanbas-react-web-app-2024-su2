@@ -1,4 +1,4 @@
-/*
+
 export default function ModuleEditor({ dialogTitle, moduleName, setModuleName, addModule }:
     { dialogTitle: string; moduleName: string; setModuleName: (name: string) => void; addModule: () => void; }) {
       return (
@@ -25,8 +25,3 @@ export default function ModuleEditor({ dialogTitle, moduleName, setModuleName, a
                              </div>
                            );
                          }
-*/
-
-export default function ModuleEditor(){
-    return(2);
-}

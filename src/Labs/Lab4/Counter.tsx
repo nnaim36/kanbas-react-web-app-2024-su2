@@ -6,9 +6,9 @@ export default function Counter() {
   return (
     <div>
       <h2>Counter: {count}</h2>
-      <button onClick={() => setCount(count + 1)}
+      <button className="btn btn-lg btn-success m-2" onClick={() => setCount(count + 1)}
               id="wd-counter-up-click">Up</button>
-      <button onClick={() => setCount(count - 1)}
+      <button className="btn btn-lg btn-danger m-2" onClick={() => setCount(count - 1)}
               id="wd-counter-down-click">Down</button>
       <hr/>
     </div>

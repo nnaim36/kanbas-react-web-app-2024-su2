@@ -13,12 +13,11 @@ import { Link, useLocation } from "react-router-dom";
 export default function Assignments() {
     const test2= "RS102";
     const test = useParams();
-    const cid = test.id;
-    console.log("assignements cid");
-    console.log(cid);
+    const cid = test.cid;
+    console.log("assign: ",test);
+    console.log("assignements cid: ",cid);
     const assignment_list = assignments.filter((assignment) => assignment.course === cid);
-    console.log("assignment list");
-    console.log(assignment_list);
+    console.log("assignment list",assignment_list);
     return (
       <div id="wd-assignments">
 
