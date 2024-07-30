@@ -1,9 +1,12 @@
+
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 //import { courses,assignments } from "../../Database";
 import { addAssignment,deleteAssignment ,updateAssignment,editAssignment}
   from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
+
+
 
 //placeholder={ !isNaN(fGrade) ? `${fGrade}` : "0"}
 export default function AssignmentEditor() {
@@ -16,27 +19,44 @@ export default function AssignmentEditor() {
   const dispatch = useDispatch();
 
   const assignment = assignments.find((assignment:any) => assignment._id ===cid);
-  //const assignemnt_copy =JSON.parse(JSON.stringify(assignment));
-  const assignemnt_copy = structuredClone(assignment);
-  //assignemnt_copy.title = "testing";
-  const [assignmentName,setAssignmentName] = useState(assignemnt_copy.title);
+
+
   
+  
+  //const assignment_copy =JSON.parse(JSON.stringify(assignment));
+  //const assignment_copy = structuredClone(assignment);
+  //assignment.title = "testing";
+  const [newAssignment,setNewAssignment] = useState(assignment);
+  const [localTitle,setLocalTitle] = useState(assignment.title);
+  const [localDescrip,setLocalDescrip] = useState(assignment.description);
+  
+  const handlesave =() => {
+
+    dispatch(
+      updateAssignment({...assignment,title:newAssignment.title, 
+        description:newAssignment.description,points:newAssignment.points,
+      due_date:newAssignment.due_date,avail_date:newAssignment.avail_date,
+    until_date:newAssignment.until_date})
+    )
+    
+  }
   
   console.log("editor assignments:",assignments);
-   console.log("editor assignment:",assignment);
-   console.log("editor assignment copy:",assignemnt_copy);
+  console.log("editor assignment:",assignment);
+  console.log("editor assignment copy:",assignment);
+  
     return (
       <div id="wd-assignments-editor" className="d-flex flex-column">
         <label htmlFor="wd-name" className="form-label">Assignment Name</label>
         <br />
-        <input id="wd-name" type="text" className="form-control" value={`${assignemnt_copy?.title}`} 
-        onChange={(e) =>  dispatch(
-          updateAssignment({ ...assignemnt_copy, title: e.target.value }) 
-        )}/><br /><br />
-        <textarea id="wd-description" className="form-control" rows={10} value={`${assignemnt_copy?.description}`}
-        onChange={(e) =>  dispatch(
-          updateAssignment({ ...assignemnt_copy, description: e.target.value }) 
-        )}>
+        <input id="wd-name" type="text" className="form-control" value={newAssignment.title} 
+        onChange={(e) => 
+          setNewAssignment({ ...newAssignment, title: e.target.value }) 
+        }/><br /><br />
+        <textarea id="wd-description" className="form-control" rows={10} value={newAssignment.description}
+        onChange={(e) =>  
+          setNewAssignment({ ...newAssignment, description: e.target.value }) 
+        }>
 
         </textarea>
         <br />
@@ -48,10 +68,10 @@ export default function AssignmentEditor() {
             <label htmlFor="wd-points" className="form-label text-right m-2 me-3">Points</label>
             </div>
             <div className="col-9">
-            <input id="wd-points" className="form-control" value={`${assignemnt_copy?.points}`} 
-            onChange={(e) =>  dispatch(
-              updateAssignment({ ...assignemnt_copy, points: e.target.value }) 
-            )}/>
+            <input id="wd-points" className="form-control" value={newAssignment.points} 
+            onChange={(e) =>
+              setNewAssignment({ ...newAssignment, points: e.target.value }) 
+            }/>
             </div>
           </div>
         </div>
@@ -126,11 +146,11 @@ export default function AssignmentEditor() {
               <br />
               <input type="date"
                   id="wd-due-date"
-                  value={`${assignemnt_copy?.due_date}`}
+                  value={newAssignment.due_date}
                   className="form-control"
-                  onChange={(e) =>  dispatch(
-                    updateAssignment({ ...assignemnt_copy, due_date: e.target.value }) 
-                  )}
+                  onChange={(e) =>
+                    setNewAssignment({ ...newAssignment, due_date: e.target.value }) 
+                  }
                   />
                   <br />
                   <br/>
@@ -140,11 +160,11 @@ export default function AssignmentEditor() {
                   <br />
                   <input type="date"
                     id="wd-available-from"
-                    value={`${assignemnt_copy?.avail_date}`}
+                    value={newAssignment.avail_date}
                     className="form-control"
-                    onChange={(e) =>  dispatch(
-                      updateAssignment({ ...assignemnt_copy, avail_date: e.target.value }) 
-                    )}
+                    onChange={(e) =>
+                      setNewAssignment({ ...newAssignment, avail_date: e.target.value }) 
+                    }
                     />
                   <br />
                   <br/>
@@ -154,11 +174,11 @@ export default function AssignmentEditor() {
                   <br />
                   <input type="date"
                   id="wd-available-until"
-                  value={`${assignemnt_copy?.until_date}`}
+                  value={newAssignment.until_date}
                   className="form-control"
-                  onChange={(e) =>  dispatch(
-                    updateAssignment({ ...assignemnt_copy, until_date: e.target.value }) 
-                  )}
+                  onChange={(e) => 
+                    setNewAssignment({ ...newAssignment, until_date: e.target.value }) 
+                  }
                   />
                   <br />
                   <br/>
@@ -171,10 +191,15 @@ export default function AssignmentEditor() {
         <button className="btn border-dark me-2" onClick={() => window.location.href = `#/Kanbas/Courses/${courseval}/Assignments`}>
           Cancel
         </button>
-        <button className="btn border-dark me-2"
+        {/*<button className="btn border-dark me-2"
         onClick={() => window.location.href = `#/Kanbas/Courses/${courseval}/Assignments`}>
           Save
-        </button>
+        </button>*/}
+        {/*<Link onClick={() => dispatch(updateAssignment(assignment))} to={`/Kanbas/Courses/${courseval}/Assignments`}*/}
+        <Link onClick={() => handlesave()} to={`/Kanbas/Courses/${courseval}/Assignments`}
+        className="btn btn-success ms-2 float-end">
+  Save
+</Link>
       </div>
     </div>
   );}

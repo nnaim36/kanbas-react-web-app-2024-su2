@@ -44,6 +44,7 @@ export default function Modules(){
   console.log("module value",modules);
   console.log(modules);
   const module_list = modules.filter((module:any) => module.course === cid );
+  console.log("module list:",module_list);
   return(
 <div id="wd-modules">
 
