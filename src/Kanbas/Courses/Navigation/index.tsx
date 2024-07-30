@@ -5,7 +5,7 @@ import "./index.css";
 export default function CoursesNavigation() {
     const links = ["Home", "Modules", "Piazza", "Zoom", "Assignments", "Quizzes", "Grades"];
     const test = useParams();
-    const cid = test.id;
+    const cid = test.cid;
     const course = courses.find((course) => course._id ===cid);
     return (
       <div id="wd-courses-navigation" className="list-group fs-5 rounded-0">

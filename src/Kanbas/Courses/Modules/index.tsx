@@ -4,7 +4,7 @@ import ModuleControlsButtons from "./ModuleControlButtons";
 import LessonControlButtons from "./LessonControlButtons";
 import { BsGripVertical } from "react-icons/bs";
 import { useParams } from "react-router-dom";
-import * as db from "../../Database";
+//import * as db from "../../Database";
 //import { modules } from "../../Database";
 import { addModule, editModule, updateModule, deleteModule }
   from "./reducer";
@@ -41,8 +41,9 @@ export default function Modules(){
 */
 
 
-  console.log("module value");
+  console.log("module value",modules);
   console.log(modules);
+  const module_list = modules.filter((module:any) => module.course === cid );
   return(
 <div id="wd-modules">
 
@@ -56,7 +57,7 @@ export default function Modules(){
   }}/>
   <br /><br /><br /><br />
   <ul id="wd-modules" className="list-group rounded-0">
-    {modules.map((module:any) => (
+    {module_list.map((module:any) => (
       <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
         <div className="wd-title p-3 ps-2 bg-secondary d-flex justify-content-between align-items-center">
           <div>
@@ -87,13 +88,15 @@ export default function Modules(){
           </div>
         </div>
           <ul id="wd-modules" className="wd-lessons list-group rounded-0">
-            
+            {/*}
             {modules.filter((module:any) => module.course === cid)
               .map((module: any) => (
+              */}
+               {module.lessons?.map((lesson:any) =>(
 
               <li className="wd-lesson list-group-item p-3 ps-1">
                 <BsGripVertical className="me-2 fs-3" />
-                {module.name}
+                {lesson.name}
                 <LessonControlButtons />
               </li>
             ))}
