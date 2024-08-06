@@ -123,7 +123,6 @@ export default function Assignments() {
         */}
         </div>
         </div>
-        
 
         <div className="d-flex">
         <ul id="wd-assignments2" className="list-group rounded-0">
