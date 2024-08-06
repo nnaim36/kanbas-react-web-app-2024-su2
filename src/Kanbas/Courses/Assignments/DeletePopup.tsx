@@ -1,8 +1,15 @@
-//import { deleteAssignment } from "./reducer";
+import { deleteAssignment } from "./reducer";
+import * as client from "./client";
+import { useSelector, useDispatch } from "react-redux";
 
-export default function DeletePopup({ dialogTitle, moduleName,deleteAssignment  }:
-    { dialogTitle: string; moduleName: string; deleteAssignment:(module:string) =>void;}) {
-    console.log("delepop up module:",moduleName);
+export default function DeletePopup({ dialogTitle, assignmentsID,deleteAssignment  }:
+    { dialogTitle: string; assignmentsID: string;deleteAssignment:(assignmentID:string)=>void}) {
+    console.log("delepop up module:",assignmentsID);
+
+    
+    
+    const dispatch = useDispatch();
+
     
       return (
         <div id="wd-delete-module-dialog" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
@@ -20,7 +27,7 @@ export default function DeletePopup({ dialogTitle, moduleName,deleteAssignment  
                                    <div className="modal-footer">
                                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
                                        Cancel </button>
-                                     <button onClick={() => deleteAssignment(moduleName)} type="button" data-bs-dismiss="modal" className="btn btn-danger">
+                                     <button onClick={() => deleteAssignment(assignmentsID)} type="button" data-bs-dismiss="modal" className="btn btn-danger">
                                        Delete </button>
                                    </div>
                                  </div>

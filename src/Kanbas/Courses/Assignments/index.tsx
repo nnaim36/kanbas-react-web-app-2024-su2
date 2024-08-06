@@ -18,6 +18,8 @@ import NewAssignment from "./NewAssignment";
 import ModulesControls from "./AssignmentControls";
 import DeleteAssignments from "./DeleteAssignment";
 import { setAssignment } from "./reducer";
+import { FaTrash } from "react-icons/fa6";
+import DeletePopup from "./DeletePopup";
 
 export default function Assignments() {
     const test2= "RS102";
@@ -64,11 +66,11 @@ export default function Assignments() {
     const [assignmentName,setAssignmentName] = useState("");
     const [assignmentDescript,setAssignmentDescrip] = useState("");
     const [assignmentPoints,setAssignmentPoints] = useState("");
-
+      const [assignmentID,setAssignmentID] = useState();
     const [assignmentDue,setAssignmentDue] = useState("");
     const [assignmentAvail,SetAssignmentAvail] = useState("");
     const [assignmentUntil,SetAssignmentUntil] = useState("");
-
+    const [selectedAssignmentId, setSelectedAssignmentId] = useState("");
     //const {assignments} = useSelector((state:any) => state.assignmentReducer);
 
 
@@ -177,12 +179,21 @@ export default function Assignments() {
                 
                 <div className="d-flex">
                   <div>
+                    {/*
                   <DeleteAssignments
                     assignmentID={assignment._id}
                     deleteAssignment = {(moduleId) => {
                       removeAssignment(moduleId);
                     }}
                   />
+                  */}
+                    <button id="wd-delete-module-btn" className="btn"
+                      data-bs-toggle="modal" data-bs-target="#wd-delete-module-dialog"
+                      onClick={() => setSelectedAssignmentId(assignment._id)}>
+                      <FaTrash className="text-danger me-2 mb-1" />
+                      
+                      
+                    </button>
                   </div>
                   <div>
                   <GreenCheckmark />
@@ -208,6 +219,10 @@ export default function Assignments() {
                 setAssignmentName={setAssignmentName}
                 addAssignment={addAssignment} />
       */}
+      <DeletePopup dialogTitle="Warning" 
+            assignmentsID={selectedAssignmentId} 
+            deleteAssignment={(assignmentsID) => {removeAssignment(selectedAssignmentId)}}
+        />
       
     </div>
 );}
