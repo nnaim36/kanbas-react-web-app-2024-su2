@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect  } from "react";
 import { BsGripVertical } from "react-icons/bs";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 import GreenCheckmark from "../Modules/GreenCheckmark";
@@ -10,17 +10,50 @@ import { GoPlus } from "react-icons/go";
 import { enrollments } from "../../Database";
 import { useParams } from "react-router-dom";
 import { Link, useLocation } from "react-router-dom";
+import * as client from "./client";
 
-import { addAssignment,deleteAssignment } from "./reducer";
+import { addAssignment,deleteAssignment,updateAssignment } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
 import NewAssignment from "./NewAssignment";
 import ModulesControls from "./AssignmentControls";
 import DeleteAssignments from "./DeleteAssignment";
+import { setAssignment } from "./reducer";
 
 export default function Assignments() {
     const test2= "RS102";
     const test = useParams();
     const cid = test.cid;
+    const dispatch = useDispatch();
+
+    const { assignments } = useSelector((state: any) => state.assignmentReducer);
+
+    const createAssignment = async (assignment:any) =>{
+      const newAssignment = await client.createAssignment(cid as string, assignment);
+      dispatch(addAssignment(newAssignment));
+    };
+
+    const removeAssignment = async (assignmentId: string) => {
+      await client.deleteAssignment(assignmentId);
+      dispatch(deleteAssignment(assignmentId));
+    };
+
+    const saveAssignment = async (assignment: any) => {
+      const status = await client.updateAssignment(assignment);
+      dispatch(updateAssignment(assignment));
+    };
+
+    const fetchAssignments = async () => {
+      const assignments = await client.findAssignmentsForCourse(cid as string);
+      dispatch(setAssignment(assignments));
+    };
+    useEffect(() => {
+      fetchAssignments();
+    }, []);
+    
+
+    //const assignment_list = assignments.?;
+    //const assignment_list = assignments.filter((module:any) => module.course === cid );
+    const assignment_list = assignments.filter((assignment:any) => assignment.course === cid);
 
     {/*
     console.log("assign: ",test);
@@ -36,11 +69,10 @@ export default function Assignments() {
     const [assignmentAvail,SetAssignmentAvail] = useState("");
     const [assignmentUntil,SetAssignmentUntil] = useState("");
 
-    const {assignments} = useSelector((state:any) => state.assignmentReducer);
-    const dispatch = useDispatch();
-    const assignment_list = assignments.filter((assignment:any) => assignment.course === cid);
+    //const {assignments} = useSelector((state:any) => state.assignmentReducer);
 
-    const moduleName = "test";
+
+    //const moduleName = "test";
     //const setModuleName = "test2";
     //const setModuleName =  setModuleName: (title: string) => void;
     //const setModuleName = addAssignment;
@@ -78,7 +110,7 @@ export default function Assignments() {
         SetAssignmentUntil={SetAssignmentUntil}
         
         addAssignment={() => {
-          dispatch(addAssignment({ title: assignmentName, course: cid }));
+          createAssignment({title:assignmentName,description:assignmentDescript,points:assignmentPoints,due_date:assignmentDue,avail_date:assignmentAvail,until_date:assignmentUntil});
           setAssignmentName("");
         }}/>
         {/*}
@@ -148,7 +180,7 @@ export default function Assignments() {
                   <DeleteAssignments
                     assignmentID={assignment._id}
                     deleteAssignment = {(moduleId) => {
-                      dispatch(deleteAssignment(moduleId));
+                      removeAssignment(moduleId);
                     }}
                   />
                   </div>

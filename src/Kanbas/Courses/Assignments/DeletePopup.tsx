@@ -2,7 +2,8 @@
 
 export default function DeletePopup({ dialogTitle, moduleName,deleteAssignment  }:
     { dialogTitle: string; moduleName: string; deleteAssignment:(module:string) =>void;}) {
-        console.log("delepop up module:",moduleName);
+    console.log("delepop up module:",moduleName);
+    
       return (
         <div id="wd-delete-module-dialog" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
           <div className="modal-dialog">

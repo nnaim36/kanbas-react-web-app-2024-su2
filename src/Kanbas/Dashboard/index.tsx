@@ -38,7 +38,7 @@ export default function Dashboard(
 
 
   console.log("dashboard courses:",courses);
-  console.log("dashboard courses val1", typeof courses[0]._id);
+  console.log("dashboard courses val1", typeof courses[0]?._id);
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
@@ -63,7 +63,7 @@ export default function Dashboard(
         <div className="row row-cols-1 row-cols-md-5 g-4">
           {courses.map((course) => (
             <div className="wd-dashboard-course col" style={{ width: "300px" }}>
-              <Link to={`/Kanbas/Courses/${course._id}/Home`} className="text-decoration-none" >
+              <Link to={`/Kanbas/Courses/${course?._id}/Home`} className="text-decoration-none" >
                 <div className="card rounded-3 overflow-hidden">
                   <img src="/images/reactjs.jpg" height="{160}" />
                   <div className="card-body">
@@ -74,11 +74,11 @@ export default function Dashboard(
                     <p className="wd-dashboard-course-title card-text" style={{ maxHeight: 53, overflow: "hidden" }}>
                       {course.description}
                     </p>
-                    <Link to={`/Kanbas/Courses/${course._id}/Home`} className="btn btn-primary">Go</Link>
+                    <Link to={`/Kanbas/Courses/${course?._id}/Home`} className="btn btn-primary">Go</Link>
                     
                     <button onClick={(event) => {
                       event.preventDefault();
-                      deleteCourse(course._id);
+                      deleteCourse(course?._id);
                     }} className="btn btn-danger float-end"
                     id="wd-delete-course-click">
                     Delete

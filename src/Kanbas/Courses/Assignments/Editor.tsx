@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { addAssignment,deleteAssignment ,updateAssignment,editAssignment}
   from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
-
+import * as client from "./client";
 
 
 //placeholder={ !isNaN(fGrade) ? `${fGrade}` : "0"}
@@ -17,6 +17,13 @@ export default function AssignmentEditor() {
   const {assignments} = useSelector((state:any) => state.assignmentReducer);
 
   const dispatch = useDispatch();
+
+  const saveAssignment = async (assignment: any) => {
+    console.log("assignment editor:",assignment);
+    const status = await client.updateAssignment(assignment);
+    dispatch(updateAssignment(assignment));
+  };
+
 
   const assignment = assignments.find((assignment:any) => assignment._id ===cid);
 
@@ -31,13 +38,18 @@ export default function AssignmentEditor() {
   const [localDescrip,setLocalDescrip] = useState(assignment.description);
   
   const handlesave =() => {
-
+    /*
     dispatch(
       updateAssignment({...assignment,title:newAssignment.title, 
         description:newAssignment.description,points:newAssignment.points,
       due_date:newAssignment.due_date,avail_date:newAssignment.avail_date,
     until_date:newAssignment.until_date})
     )
+    */
+    saveAssignment({...assignment,title:newAssignment.title, 
+      description:newAssignment.description,points:newAssignment.points,
+    due_date:newAssignment.due_date,avail_date:newAssignment.avail_date,
+  until_date:newAssignment.until_date});
     
   }
   
@@ -196,6 +208,10 @@ export default function AssignmentEditor() {
           Save
         </button>*/}
         {/*<Link onClick={() => dispatch(updateAssignment(assignment))} to={`/Kanbas/Courses/${courseval}/Assignments`}*/}
+        {/*
+        <Link onClick={() => handlesave()} to={`/Kanbas/Courses/${courseval}/Assignments`}
+        className="btn btn-success ms-2 float-end">
+        */}
         <Link onClick={() => handlesave()} to={`/Kanbas/Courses/${courseval}/Assignments`}
         className="btn btn-success ms-2 float-end">
   Save
