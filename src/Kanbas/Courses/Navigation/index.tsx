@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import "./index.css";
 
 export default function CoursesNavigation() {
-    const links = ["Home", "Modules", "Piazza", "Zoom", "Assignments", "Quizzes", "Grades"];
+    const links = ["Home", "Modules", "Piazza", "Zoom", "Assignments", "Quizzes", "Grades", "People"];
     const test = useParams();
     const cid = test.cid;
     const course = courses.find((course) => course._id ===cid);

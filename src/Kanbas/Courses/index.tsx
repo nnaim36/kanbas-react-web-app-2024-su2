@@ -9,6 +9,8 @@ import { Navigate, Route, Routes, useLocation,useParams} from "react-router-dom"
 
 import { FaAlignJustify } from 'react-icons/fa';
 import "../styles.css";
+import PeopleTable from "./People/Table";
+import Account from "../Account";
 
 export default function Courses({ courses }: { courses: any[]; }) {
     const test = useParams();
@@ -40,10 +42,13 @@ export default function Courses({ courses }: { courses: any[]; }) {
               <Route path="Modules" element={<Modules />} />
               <Route path="Piazza" element={<h1>Piazza</h1>} />
               <Route path="Zoom" element={<h1>Zoom</h1>} />
+              <Route path="Quizzes" element={<h1>Quizzes!</h1>} />
               <Route path="Assignments" element={<Assignments />} />
               <Route path="Assignments/:id" element={<AssignmentEditor />} />
-              <Route path="Quizzes" element={<h1>Quizzes</h1>} />
+              <Route path="Quizzes" element={<h1>Quizzes!</h1>} />
               <Route path="Grades" element={<Grades />} />
+              <Route path="People" element={<PeopleTable />} />
+              <Route path="People/:uid" element={<PeopleTable />} />
             </Routes>
       </div>
 

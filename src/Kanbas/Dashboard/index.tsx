@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, UseSelector } from "react-redux";
 //import * as db from "../Database";
 
 export default function Dashboard(
@@ -39,9 +40,11 @@ export default function Dashboard(
 
   console.log("dashboard courses:",courses);
   console.log("dashboard courses val1", typeof courses[0]?._id);
+  const {currentUser} = useSelector((state:any) =>state.accountReducer);
+  
   return (
     <div id="wd-dashboard">
-      <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
+      <h1 id="wd-dashboard-title">Dashboard({currentUser.username})</h1> <hr />
       <h5>New Course
           <button className="btn btn-primary float-end"
                   id="wd-add-new-course-click"
