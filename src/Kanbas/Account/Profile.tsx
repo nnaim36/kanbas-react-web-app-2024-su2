@@ -11,6 +11,8 @@ export default function Profile() {
   const fetchProfile = async () => {
     try{
         const account = await client.profile();
+        dispatch(setCurrentUser(null));
+
         setProfile(account);
     }
     catch(err:any){

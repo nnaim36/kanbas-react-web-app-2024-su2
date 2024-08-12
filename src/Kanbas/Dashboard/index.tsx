@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, UseSelector } from "react-redux";
+import { createCourse } from "../Courses/client";
+import * as client from "../Courses/client";
 //import * as db from "../Database";
 
 export default function Dashboard(
@@ -36,21 +38,55 @@ export default function Dashboard(
       })
     );
   };*/
+  const [courses2,setCourses2] = useState<any[]>([]);
 
+  const deleteCourse2 = async(cid:string) =>{
+    console.log("DELETING!!!:",cid);
+    await client.deleteCourse2(cid);
+    fetchAllCourses();
+  };
 
-  console.log("dashboard courses:",courses);
-  console.log("dashboard courses val1", typeof courses[0]?._id);
-  const {currentUser} = useSelector((state:any) =>state.accountReducer);
+  const fetchAllCourses = async() =>{
+    const courses = await client.findAllCourses();
+    setCourses2(courses);
+  };
   
+  const saveCourse = async () => {
+    const updatedCourse = {...course}
+    console.log("updated course:",course);
+    await client.updateCourse(course);
+  }
+
+  const createCourse = async () => {
+    const course = await client.createCourse({
+      name:"temp",
+      number:`N${Date.now()}`,
+      credits:4,
+      description:"temp"
+
+    });
+    setCourses2([...courses2,course]);
+  };
+
+
+  //console.log("dashboard courses:",courses);
+  //console.log("dashboard courses val1", typeof courses[0]?._id);
+  const {currentUser} = useSelector((state:any) =>state.accountReducer);
+  useEffect(()=>{
+    fetchAllCourses();
+  },[]);
+
   return (
     <div id="wd-dashboard">
-      <h1 id="wd-dashboard-title">Dashboard({currentUser.username})</h1> <hr />
+      {/*<h1 id="wd-dashboard-title">Dashboard({currentUser.username})</h1> */}
+      <h1 id="wd-dashboard-title">Dashboard()</h1> 
+      <hr />
       <h5>New Course
           <button className="btn btn-primary float-end"
                   id="wd-add-new-course-click"
-                  onClick={addNewCourse} > Add </button>
+                  onClick={createCourse} > Add </button>
         <button className="btn btn-warning float-end me-2"
-                onClick={updateCourse} id="wd-update-course-click">
+                onClick={saveCourse} id="wd-update-course-click">
           Update
         </button>
       </h5><br />
@@ -61,12 +97,12 @@ export default function Dashboard(
       onChange={(e) => setCourse({ ...course, description: e.target.value }) } />
 <hr />
 
-      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2> <hr />
+      <h2 id="wd-dashboard-published">Published Courses ({courses2.length})</h2> <hr />
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4">
-          {courses.map((course) => (
+          {courses2.map((course) => (
             <div className="wd-dashboard-course col" style={{ width: "300px" }}>
-              <Link to={`/Kanbas/Courses/${course?._id}/Home`} className="text-decoration-none" >
+              <Link to={`/Kanbas/Courses/${course?.number}/Home`} className="text-decoration-none" >
                 <div className="card rounded-3 overflow-hidden">
                   <img src="/images/reactjs.jpg" height="{160}" />
                   <div className="card-body">
@@ -77,11 +113,11 @@ export default function Dashboard(
                     <p className="wd-dashboard-course-title card-text" style={{ maxHeight: 53, overflow: "hidden" }}>
                       {course.description}
                     </p>
-                    <Link to={`/Kanbas/Courses/${course?._id}/Home`} className="btn btn-primary">Go</Link>
+                    <Link to={`/Kanbas/Courses/${course?.number}/Home`} className="btn btn-primary">Go</Link>
                     
                     <button onClick={(event) => {
                       event.preventDefault();
-                      deleteCourse(course?._id);
+                      deleteCourse2(course?._id);
                     }} className="btn btn-danger float-end"
                     id="wd-delete-course-click">
                     Delete
