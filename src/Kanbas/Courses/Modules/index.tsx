@@ -20,7 +20,8 @@ export default function Modules(){
   //const [moduleName, setModuleName] = useState("");
   const [moduleName, setModuleName] = useState("");
 
-  const { modules } = useSelector((state: any) => state.modulesReducer);
+  //const { modules } = useSelector((state: any) => state.modulesReducer);
+  const [modules, setModules] = useState<any[]>([]);
   const dispatch = useDispatch();
 
   const removeModule = async (moduleId: string) => {
@@ -40,11 +41,12 @@ export default function Modules(){
   };
 
   const fetchModules = async () => {
+    console.log("cid:",cid);
     const modules = await client.findModulesForCourse(cid as string);
-    dispatch(setModules(modules));
+    setModules(modules);
   };
   useEffect(() => {
-    fetchModules();
+    //fetchModules();
   }, []);
 
   

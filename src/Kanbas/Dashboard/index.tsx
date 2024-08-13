@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, UseSelector } from "react-redux";
-import { createCourse } from "../Courses/client";
+//import { createCourse } from "../Courses/client";
 import * as client from "../Courses/client";
 //import * as db from "../Database";
 //this to trigger rediploy 
@@ -55,6 +55,7 @@ export default function Dashboard(
     const updatedCourse = {...course}
     console.log("updated course:",course);
     await client.updateCourse(course);
+    fetchAllCourses();
   }
 
   const createCourse = async () => {
@@ -70,6 +71,7 @@ export default function Dashboard(
 
 
   //console.log("dashboard courses:",courses);
+  //console.log("dashboard courses2:",courses2);
   //console.log("dashboard courses val1", typeof courses[0]?._id);
   const {currentUser} = useSelector((state:any) =>state.accountReducer);
   useEffect(()=>{
@@ -102,7 +104,7 @@ export default function Dashboard(
         <div className="row row-cols-1 row-cols-md-5 g-4">
           {courses2.map((course) => (
             <div className="wd-dashboard-course col" style={{ width: "300px" }}>
-              <Link to={`/Kanbas/Courses/${course?.number}/Home`} className="text-decoration-none" >
+              <Link to={`/Kanbas/Courses/${course?._id}/Home`} className="text-decoration-none" >
                 <div className="card rounded-3 overflow-hidden">
                   <img src="/images/reactjs.jpg" height="{160}" />
                   <div className="card-body">
@@ -113,7 +115,7 @@ export default function Dashboard(
                     <p className="wd-dashboard-course-title card-text" style={{ maxHeight: 53, overflow: "hidden" }}>
                       {course.description}
                     </p>
-                    <Link to={`/Kanbas/Courses/${course?.number}/Home`} className="btn btn-primary">Go</Link>
+                    <Link to={`/Kanbas/Courses/${course?._id}/Home`} className="btn btn-primary">Go</Link>
                     
                     <button onClick={(event) => {
                       event.preventDefault();
