@@ -41,3 +41,7 @@ export const updateModule = async (module: any) => {
 };
 
 
+export const fetchAllModules =async () => {
+  const response = await axios.get(MODULES_API);
+  return response.data;
+};

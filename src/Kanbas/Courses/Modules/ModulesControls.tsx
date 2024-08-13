@@ -6,6 +6,8 @@ import '../../../Kanbas/styles.css';
 
 export default function ModulesControls({ moduleName, setModuleName, addModule }:
     { moduleName: string; setModuleName: (title: string) => void; addModule: () => void; }){
+
+    console.log("modules controls cid:",moduleName);
     return(
         <div id="wd-modules-controls" className="text-nowrap" >
             <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end" 

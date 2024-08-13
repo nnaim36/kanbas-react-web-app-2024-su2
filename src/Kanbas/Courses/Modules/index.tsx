@@ -42,11 +42,13 @@ export default function Modules(){
 
   const fetchModules = async () => {
     console.log("cid:",cid);
-    const modules = await client.findModulesForCourse(cid as string);
+    //const modules = await client.findModulesForCourse(cid as string);
+    const modules = await client.fetchAllModules();
+    console.log("modules:",modules);
     setModules(modules);
   };
   useEffect(() => {
-    //fetchModules();
+    fetchModules();
   }, []);
 
   
@@ -69,9 +71,9 @@ export default function Modules(){
 */
 
 
-  console.log("module value",modules);
-  console.log(modules);
-  const module_list = modules.filter((module:any) => module.course === cid );
+  //console.log("module value",modules);
+  //console.log(modules);
+  const module_list = modules.filter((module:any) => module.courseid === cid );
   console.log("module list:",module_list);
   return(
 <div id="wd-modules">
@@ -83,7 +85,8 @@ export default function Modules(){
   addModule={() => {
     createModule({ name: moduleName, course: cid });
     setModuleName("");
-  }}/>
+  }}
+  />
   <br /><br /><br /><br />
   <ul id="wd-modules" className="list-group rounded-0">
     {module_list.map((module:any) => (
