@@ -2,12 +2,17 @@ import {FaPlus} from "react-icons/fa6";
 import GreenCheckmark from "./GreenCheckmark";
 import { MdDoNotDisturbAlt } from "react-icons/md";
 import ModuleEditor from "./ModuleEditor";
+import { useParams } from "react-router-dom";
 import '../../../Kanbas/styles.css';
+import * as client from "./client";
 
-export default function ModulesControls({ moduleName, setModuleName, addModule }:
-    { moduleName: string; setModuleName: (title: string) => void; addModule: () => void; }){
+export default function ModulesControls({ modules,setModules,moduleName, setModuleName, addModule }:
+    { modules:any;setModules:(module:any)  =>void ;moduleName: string; setModuleName: (title: string) => void; addModule: () => void; }){
 
-    console.log("modules controls cid:",moduleName);
+        
+    
+    const { cid } = useParams();
+    console.log("modules controls cid:",cid);
     return(
         <div id="wd-modules-controls" className="text-nowrap" >
             <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end" 
@@ -57,7 +62,7 @@ export default function ModulesControls({ moduleName, setModuleName, addModule }
                 Collapse All
             </button>
             <ModuleEditor dialogTitle="Add Module" moduleName={moduleName}
-                    setModuleName={setModuleName} addModule={addModule} />
+                    setModuleName={setModuleName} addModule={addModule} setModules={setModules} modules={modules}/>
         </div>
     );
 }

@@ -4,15 +4,21 @@ import { BsPlus } from "react-icons/bs";
 import { FaTrash } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
 
+
+
 export default function ModuleControlsButtons(
-    { moduleId, deleteModule,editModule  }: { 
+    { moduleId, deleteModule,editModule,setEditing  }: { 
         moduleId: string; 
-        deleteModule: (moduleId: string) => void; 
+        deleteModule: (moduleId: string) => void;
+        setEditing:(editing:string) =>void; 
         editModule: (moduleId: string) => void})
     {
+
+    //const [editing, setEditing] = useState(false); 
     return(
         <div>
-            <FaPencil onClick={() => editModule(moduleId)} className="text-primary me-3" />
+            {/*<FaPencil onClick={() => editModule(moduleId)} className="text-primary me-3" />*/}
+            <FaPencil onClick={() => setEditing(moduleId)} className="text-primary me-3" />
             <FaTrash className="text-danger me-2 mb-1" onClick={() => deleteModule(moduleId)}/>
             <GreenCheckmark />
             <BsPlus className="fs-1" />

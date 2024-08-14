@@ -13,12 +13,14 @@ export const deleteModule = async (moduleId: string) => {
 };  
 
 //new module
+/*
 export const createModule = async (courseId: string, module: any) => {
     //console.log("module client module:",module);
     const response = await axios.post( `${COURSES_API}/${courseId}/modules`, module );
     //console.log("module client adding ID:",module);
     return response.data;
 };  
+*/
 
 //get modules
 export const findModulesForCourse = async (courseId: string) => {
@@ -43,5 +45,11 @@ export const updateModule = async (module: any) => {
 
 export const fetchAllModules =async () => {
   const response = await axios.get(MODULES_API);
+  return response.data;
+};
+
+export const createModule = async(module:any) => {
+  console.log("route create module:",module);
+  const response = await axios.post(`${MODULES_API}`,module);
   return response.data;
 };

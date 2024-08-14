@@ -4,6 +4,7 @@ import Home from "./Home";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
+import { useEffect, useState } from "react";
 
 import { Navigate, Route, Routes, useLocation,useParams} from "react-router-dom"
 
@@ -17,6 +18,7 @@ export default function Courses({ courses }: { courses: any[]; }) {
     const cid = test.cid;
     const course = courses.find((course) => course._id === cid);
     const { pathname } = useLocation();
+
     console.log("courses courses:",courses);
     console.log("courses course:",course);
     console.log("courses cid:",cid);

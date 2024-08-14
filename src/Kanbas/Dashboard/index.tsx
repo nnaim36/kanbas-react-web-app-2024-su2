@@ -58,12 +58,15 @@ export default function Dashboard(
     fetchAllCourses();
   }
 
-  const createCourse = async () => {
+  const createCourse = async (course2:any) => {
+
+
+    console.log("new course!!!!!!:",course2);
     const course = await client.createCourse({
-      name:"temp",
+      name:course2.name,
       number:`N${Date.now()}`,
       credits:4,
-      description:"temp"
+      description:course2.description
 
     });
     setCourses2([...courses2,course]);
@@ -80,13 +83,13 @@ export default function Dashboard(
 
   return (
     <div id="wd-dashboard">
-      {/*<h1 id="wd-dashboard-title">Dashboard({currentUser.username})</h1> */}
-      <h1 id="wd-dashboard-title">Dashboard()</h1> 
+      <h1 id="wd-dashboard-title">Dashboard({currentUser.username})</h1>
+
       <hr />
       <h5>New Course
           <button className="btn btn-primary float-end"
                   id="wd-add-new-course-click"
-                  onClick={createCourse} > Add </button>
+                  onClick={()=>createCourse(course)} > Add </button>
         <button className="btn btn-warning float-end me-2"
                 onClick={saveCourse} id="wd-update-course-click">
           Update

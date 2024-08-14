@@ -11,7 +11,6 @@ export default function Profile() {
   const fetchProfile = async () => {
     try{
         const account = await client.profile();
-        dispatch(setCurrentUser(null));
 
         setProfile(account);
     }
@@ -23,7 +22,8 @@ export default function Profile() {
 
   const signout = async () => {
     await client.signout();
-    navigate("/Kanbas/Account/Signin");
+        dispatch(setCurrentUser(null));
+        navigate("/Kanbas/Account/Signin");
   };
 
   return (

@@ -2,7 +2,7 @@ import React, { useState,useEffect  } from "react";
 import ModulesControls from "./ModulesControls";
 import ModuleControlsButtons from "./ModuleControlButtons";
 import LessonControlButtons from "./LessonControlButtons";
-import { BsGripVertical } from "react-icons/bs";
+import { BsGripVertical, BsPlus } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import * as client from "./client";
 //import * as db from "../../Database";
@@ -10,6 +10,9 @@ import * as client from "./client";
 import { setModules,addModule, editModule, updateModule, deleteModule }
   from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
+import { FaPencil, FaPlus, FaTrash } from "react-icons/fa6";
+import GreenCheckmark from "./GreenCheckmark";
+import { IoEllipsisVertical } from "react-icons/io5";
 
 
 export default function Modules(){
@@ -19,7 +22,8 @@ export default function Modules(){
   //const [modules, setModules] = useState<any[]>(db.modules);
   //const [moduleName, setModuleName] = useState("");
   const [moduleName, setModuleName] = useState("");
-
+  const [editing, setEditing] = useState("");
+  
   //const { modules } = useSelector((state: any) => state.modulesReducer);
   const [modules, setModules] = useState<any[]>([]);
   const dispatch = useDispatch();
@@ -27,18 +31,52 @@ export default function Modules(){
   const removeModule = async (moduleId: string) => {
     await client.deleteModule(moduleId);
     dispatch(deleteModule(moduleId));
+    fetchModules();
   };
 
 
+  const deleteModule2 = async (mid:string) =>{
+    await client.deleteModule(mid);
+    fetchModules();
+  };
   const saveModule = async (module: any) => {
     const status = await client.updateModule(module);
     dispatch(updateModule(module));
+    fetchModules();
   };
 
+  /*
   const createModule = async (module: any) => {
     const newModule = await client.createModule(cid as string, module);
     dispatch(addModule(newModule));
   };
+*/
+const createModule = async (module2: any) =>{
+  const module = await client.createModule({
+      name:moduleName,
+      courseid:cid,
+  });
+  setModules([...modules,module]);
+}
+
+const createModule2 = async () =>{
+  console.log("cid value inside create testing:",{cid});
+  const module = await client.createModule({
+      name:moduleName,
+      courseid:cid,
+      lessions:"",
+      description:"something"
+  });
+  setModules([...modules,module]);
+}
+
+const saveModule2 = async (module:any) => {
+  console.log("the eddited module is:",module);
+  const updatedModule = {...module, name:moduleName};
+  console.log("the NEw eddited module is:",updatedModule);
+  await client.updateModule(updatedModule)
+  fetchModules();
+}
 
   const fetchModules = async () => {
     console.log("cid:",cid);
@@ -82,13 +120,16 @@ export default function Modules(){
 
   
   <ModulesControls 
+  modules = {modules}
+  setModules = {setModules}
   setModuleName={setModuleName} 
   moduleName={moduleName} 
   addModule={() => {
-    createModule({ name: moduleName, course: cid });
+    createModule({  moduleName,cid });
     setModuleName("");
   }}
   />
+
   <br /><br /><br /><br />
   <ul id="wd-modules" className="list-group rounded-0">
     {modules.map((module:any) => (
@@ -96,24 +137,40 @@ export default function Modules(){
         <div className="wd-title p-3 ps-2 bg-secondary d-flex justify-content-between align-items-center">
           <div>
             <BsGripVertical className="me-4 fs-3" />
-            {!module.editing && module.name}
-            { module.editing && (
-            <input className="form-control w-50 d-inline-block"
-               onChange={(e) =>  saveModule({ ...module, name: e.target.value })}
+            {editing !== module._id && module.name}
+            { editing === module._id && (
+            <input type="text" className="form-control w-50 d-inline-block"
+               onChange={(e) =>  setModuleName(e.target.value)}
                onKeyDown={(e) => {
                  if (e.key === "Enter") {
-                  saveModule({ ...module, editing: false });
+                  
+                  setEditing("")
+                  saveModule2(module);
                  }
                }}
-               value={module.name}/>
-      )}
+               defaultValue={module.name}/>
 
+               
+            
+      )}
           </div>
           <div>
+          {/*
+            <FaPencil onClick={() => editModule(module._id)} className="text-primary me-3" />
+            <FaTrash className="text-danger me-2 mb-1" onClick={() => deleteModule(module._id)}/>
+            <GreenCheckmark />
+            <BsPlus className="fs-1" />
+            <IoEllipsisVertical className="fs-4" />
+            */}
+
             <ModuleControlsButtons
         moduleId={module._id}
+        setEditing={setEditing}
         deleteModule={(moduleId) => {removeModule(moduleId);}}
-        editModule={(moduleId) => dispatch(editModule(moduleId))}/>
+        editModule = {(moduleId) => {
+          console.log(moduleId);
+          dispatch(editModule(moduleId))
+          }}/>
 
           </div>
         </div>
